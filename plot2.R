@@ -1,0 +1,8 @@
+library(dplyr)
+powerConsume <- read.table("./household_power_consumption.txt", sep = ";", header = TRUE, na.strings = "?")
+power <- tbl_df(powerConsume)
+power_dates <- filter(power, Date == "2/2/2007" | Date == "1/2/2007")
+png(file="plot2.png", width = 480, height = 480)
+plot(strptime(paste(power_dates$Date, power_dates$Time), "%d/%m/%Y %H:%M:%S"), power_dates$Global_active_power, ylab="Global Active Power (kilowatts)", xlab="", type="n")
+lines(strptime(paste(power_dates$Date, power_dates$Time), "%d/%m/%Y %H:%M:%S"), power_dates$Global_active_power)
+dev.off()

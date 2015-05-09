@@ -1,0 +1,7 @@
+library(dplyr)
+powerConsume <- read.table("./household_power_consumption.txt", sep = ";", header = TRUE, na.strings = "?")
+power <- tbl_df(powerConsume)
+power_dates <- filter(power, Date == "2/2/2007" | Date == "1/2/2007")
+png(file="plot1.png", width = 480, height = 480)
+hist(power_dates$Global_active_power, ylim = c(0, 1300), col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")
+dev.off()
